@@ -11,8 +11,8 @@ using Newtonsoft.Json;
 
 public class SQSMessageProcessing : MonoBehaviour
 {
-    private const string IdentityPool = "YOUR_IDENTITY_POOL_ID";
-    private const string SQSURL = "YOUR_SQS_ENDPOINT";
+    private const string IdentityPool = "us-east-1:da8295a0-1523-4548-afd2-9384a70a76ed";
+    private const string SQSURL = "https://sqs.us-east-1.amazonaws.com/394128468986/rtgl-sqs-2022-1";
     private const int MaxMessages = 1;
     private const int WaitTime = 20;
 
@@ -167,9 +167,10 @@ public class SQSMessageProcessing : MonoBehaviour
     void Start()
     {
         CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-            IdentityPool, // Your Identity pool ID
-            RegionEndpoint.USEast1 // Your GameLift Region
-        );
+             IdentityPool, // Identity pool ID
+             RegionEndpoint.USEast1 // Region
+         );
+        credentials.GetCredentials();
 
         _sqsClient = new AmazonSQSClient(credentials, Amazon.RegionEndpoint.USEast1);
     }
